@@ -1,16 +1,10 @@
 import axios from "axios";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-// ✅ Axios instance with global config
-const api = axios.create({
-  baseURL: "https://chatapp-vuht.onrender.com", // Your backend
-  withCredentials: true, // ✅ required for cookies
-});
 const serverCall = async (
   url,
   method = "GET",
   data = {},
-  additionalHeaders = {}
+  additionalHeaders = {},
+  withCredentials = true
 ) => {
   const isFormData = data instanceof FormData;
 
@@ -20,32 +14,32 @@ const serverCall = async (
       : { "Content-Type": "application/json" }),
     ...additionalHeaders,
   };
+
   const requestConfig = {
     url,
     method: method.toUpperCase(),
     headers,
+    withCredentials,
   };
 
   if (requestConfig.method !== "GET") {
     requestConfig.data = data;
   }
+
   try {
-    const response = await api.request(requestConfig);
+    const response = await axios.request(requestConfig);
     return {
       success: true,
       data: response.data.user || response.data.data || {},
       message: response.data.message || "Success",
     };
   } catch (error) {
+    // You can optionally show a toast here or just return error info
     const message =
       error.response?.data?.message ||
       error.response?.data?.error ||
       error.message ||
       "API request failed";
-
-    // Optional: Show toast for errors
-    toast.error(message);
-
     return {
       success: false,
       data: {},
