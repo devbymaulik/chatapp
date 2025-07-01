@@ -183,7 +183,7 @@ export const refreshToken = (req, res) => {
   const isProd = process.env.NODE_ENV === "production";
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: isProd,
+    secure: true,
     sameSite: "None",
     maxAge: 15 * 60 * 1000,
   });

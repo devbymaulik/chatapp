@@ -10,20 +10,17 @@ export const createJWTToken = (userID, res) => {
   const refreshToken = jwt.sign({ userID }, process.env.REFRESH_TOKEN_SECRET, {
     expiresIn: "7d",
   });
-
   const isProd = process.env.NODE_ENV === "production";
-
   // Set HttpOnly cookies
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
-    secure: isProd,
+    secure: true,
     sameSite: "None",
     maxAge: 15 * 60 * 1000, // 15 mins
   });
-
   res.cookie("refreshToken", refreshToken, {
     httpOnly: true,
-    secure: isProd,
+    secure: true,
     sameSite: "None",
     maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
   });
