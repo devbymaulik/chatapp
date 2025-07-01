@@ -184,7 +184,7 @@ export const refreshToken = (req, res) => {
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: isProd,
-    sameSite: "Strict",
+    sameSite: "None",
     maxAge: 15 * 60 * 1000,
   });
   res.status(200).json({ message: "Access token refreshed" });

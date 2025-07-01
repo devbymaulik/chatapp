@@ -55,7 +55,7 @@ export const authVerification = async (req, res, next) => {
     res.cookie("accessToken", refreshResult.accessToken, {
       httpOnly: true,
       secure: isProd,
-      sameSite: "Strict",
+      sameSite: "None",
       maxAge: 15 * 60 * 1000, // 15 minutes
     });
 
