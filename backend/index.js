@@ -41,11 +41,6 @@ app.use("/public", express.static(path.join(__dirname, "public")));
 app.use("/api/user", userRouter);
 app.use("/api/message", messageRouter);
 
-// Handle all other routes (for React Router)
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
-
 // HTTP Server + Socket.io
 const server = http.createServer(app);
 try {
