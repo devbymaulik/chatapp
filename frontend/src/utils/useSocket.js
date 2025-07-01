@@ -3,7 +3,7 @@ import { io } from "socket.io-client";
 import { useDispatch, useSelector } from "react-redux";
 import { receiveMessage } from "../components/home/redux/actions.jsx";
 import useConversation from "../statemanage/useConversation";
-
+const API_BASE_URL = import.meta.env.VITE_BACKEND_URL;
 const useSocket = () => {
   const dispatch = useDispatch();
   const { data: user, isLogin } = useSelector((state) => state.signinReducer);
@@ -35,7 +35,7 @@ const useSocket = () => {
 
   useEffect(() => {
     if (isLogin && user?.id && !socketRef.current) {
-      socketRef.current = io("http://localhost:3001", {
+      socketRef.current = io(API_BASE_URL, {
         query: {
           userId: user.id,
           name: user.name,
