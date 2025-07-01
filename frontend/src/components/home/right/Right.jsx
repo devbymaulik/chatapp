@@ -56,7 +56,7 @@ export default function Right() {
   }
 
   return (
-    <div className="w-full h-full bg-slate-950 text-white flex flex-col">
+    <div className="w-full h-screen bg-slate-950 text-white flex flex-col">
       {/* Top Bar */}
       <div className="border-b border-slate-800">
         <Chatuser />
