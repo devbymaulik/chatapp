@@ -23,9 +23,9 @@ app.use(
   cors({
     origin: allowedOrigins,
     credentials: true,
+    optionsSuccessStatus: 200,
   })
 );
-
 // Middlewares
 app.use(express.json());
 app.use(cookieParser());
