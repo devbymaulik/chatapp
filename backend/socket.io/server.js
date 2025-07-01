@@ -2,13 +2,17 @@ import { Server } from "socket.io";
 let io;
 
 const onlineUsers = new Map(); // userId => { socketId, user }
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://realtime-chat-app-ma9c.onrender.com",
+];
 
 export const initSocket = (server) => {
   if (io) return io; // avoid re-initializing on hot reloads
 
   io = new Server(server, {
     cors: {
-      origin: "http://localhost:5173", // frontend origin
+      origin: allowedOrigins, // frontend origin
       methods: ["GET", "POST"],
       credentials: true,
     },

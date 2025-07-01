@@ -14,11 +14,14 @@ import { initSocket } from "./socket.io/server.js";
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 3001;
-
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://realtime-chat-app-ma9c.onrender.com",
+];
 // CORS with credentials
 app.use(
   cors({
-    origin: "http://localhost:5173",
+    origin: allowedOrigins,
     credentials: true,
   })
 );
